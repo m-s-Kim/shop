@@ -5,6 +5,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.constant.ItemSellStatus;
+import com.shop.dto.ItemDto;
 import com.shop.entity.Item;
 import com.shop.entity.QItem;
 import org.junit.jupiter.api.DisplayName;
@@ -184,8 +185,29 @@ class ItemRepositoryTest {
         for(Item item : itemPagingResult){
             System.out.println(item.toString());
         }
-
-
     }
+
+    @Test
+    @DisplayName("쿼리테스트")
+    public void test1(){
+        this.createItemTest();
+        List<Item> itemList = itemRepository.findByPriceLessThan(1000003);
+
+        for(Item item : itemList){
+            System.out.println(item.toString());
+        }
+    }
+
+
+    @Test
+    @DisplayName("값 Between")
+    public void betweenTest(){
+        this.createItemTest();
+        List<Item> itemList = itemRepository.findByPriceBetween(1000003,1000005);
+        for(Item item : itemList){
+            System.out.println(item.toString());
+        }
+    }
+
 
 }
