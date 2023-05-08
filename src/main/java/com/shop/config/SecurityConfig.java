@@ -1,6 +1,7 @@
 package com.shop.config;
 
 import com.shop.service.MemberService;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     MemberService memberService;
+
+    @Before("@annotation(com.kyu0.jungo.aop.LoginCheck)")
     protected void configure(HttpSecurity http) throws Exception{
         http.formLogin()
                 .loginPage("/members/login")
